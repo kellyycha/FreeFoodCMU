@@ -2,6 +2,8 @@
 
 https://cmufreefood.com
 
+Walk Though Video: https://www.youtube.com/watch?v=GoCHY-w4omg
+
 Requirements
 
 pip install django-widget-tweaks
