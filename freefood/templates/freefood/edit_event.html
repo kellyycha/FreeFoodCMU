@@ -1,0 +1,31 @@
+{% extends "freefood/base.html" %}
+
+{% load widget_tweaks %}
+
+{% block title %}Edit Event{% endblock %}
+
+{% block scripts %}<script src="/static/freefood/new_event_map.js"></script>{% endblock %}
+
+{% block header %}
+    {% include "freefood/subtemplates/header.html" with page="edit_event" %}
+{% endblock %}
+
+{% block body %}     
+    <form action="{% url 'edit_event' id %}" method="POST" enctype="multipart/form-data" class="row g-3 container-sm mx-auto needs-validation" novalidate>
+        <page-title>Edit Event</page-title>
+        {% include "freefood/subtemplates/event_form.html" with form_function="Save Changes" %}
+    </form>
+
+    <h1>&nbsp</h1>
+
+    <script>
+        // make a marker of the location lat/lng
+        window.addEventListener("load", (event) => {
+            let lat = parseFloat(document.getElementById("id_location_lat").value);
+            let lng = parseFloat(document.getElementById("id_location_lng").value);
+
+            set_selected_location(lat, lng);
+        });
+    </script>
+{% endblock %}
+

@@ -1,0 +1,148 @@
+{% extends "freefood/base.html" %}
+
+{% load widget_tweaks %}
+
+{% block scripts %}
+<script src="https://kit.fontawesome.com/980e4cc40c.js" crossorigin="anonymous"></script>
+<script src="/static/freefood/maps.js"></script>
+{% endblock %}
+
+{% block title %}Map{% endblock %}
+
+{% block header %}
+	{% include "freefood/subtemplates/header.html" with page="map" %}
+{% endblock %}
+
+{% block body %} 
+<div class="container-fluid">
+    {{ message }}
+    <!-- Display errors from AJAX requests?? -->
+    <div id="error"></div>
+  
+    <div class="row" style="padding: 10px;">
+        <div class="container">
+
+            <!-- Sort button dropdown -->
+            <span class="dropdown" style="z-index:10000;">
+                <button id="sort-button" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Sort: {{ sortMethod }}
+                </button>
+                <ul class="dropdown-menu">
+                  <li><button class="dropdown-item" type="button" onclick="recentSort();return false;">Recent</button></li>
+                  <li><button class="dropdown-item" type="button" onclick="ratingSort();return false;">Rating</button></li>
+                  <li><button class="dropdown-item" type="button" onclick="popularitySort();return false;">Popularity</button></li>
+                  <li><button class="dropdown-item" type="button" onclick="commentsSort();return false;">Comments</button></li>
+                </ul>
+            </span>
+
+            <!-- Date filter -->
+            {% if DateRangeForm %}
+            <span class="dropdown" style="z-index:10000;"> 
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" id="date-filter-dropdown-button">
+                    {{ DateRangeLabel }}
+                </button>
+                <form class="dropdown-menu p-4" method="POST" action="{% url 'update-date' %}" id="date-filter-form">
+                    {% csrf_token %}
+
+                    <label class="form-label" for="date-ranges-label">Select a Range</label> 
+                    <div class="form-floating" id="date-ranges-label">
+                        {% render_field DateRangeForm.startDate class="form-control" type="date" %}
+                        <label for="id_startDate">Start</label>
+                        {% include "freefood/subtemplates/new_event_help_errors.html" with field=DateRangeForm.startDate %}
+                    </div>
+                    <div class="form-floating">
+                        {% render_field DateRangeForm.endDate class="form-control" type="date" %}
+                        <label for="id_endDate">End</label>
+                        {% include "freefood/subtemplates/new_event_help_errors.html" with field=DateRangeForm.endDate %}
+                    </div>
+
+                    <li><hr class="dropdown-divider"></li>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </span>
+            {% endif %}
+
+
+            {% if RestrictionsForm %}
+            <!-- Dietary restrictions -->
+            <span class="dropdown" style="z-index:10000;">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" id="dietary-dropdown-button">
+                    {{ RestrictionsLabel }}
+                </button>
+                <form class="dropdown-menu p-4" method="POST" action="{% url 'update-dietary' %}" id="dietary-restrictions-form">
+                    {% csrf_token %}
+                    <div class="form-check">
+                        {% render_field RestrictionsForm.veg type="checkbox" class="form-check-input" %}
+                        <label class="form-check-label" for="id_veg">
+                        Vegetarian
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        {% render_field RestrictionsForm.vn type="checkbox" class="form-check-input" %}
+                        <label class="form-check-label" for="id_vn">
+                        Vegan
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        {% render_field RestrictionsForm.df type="checkbox" class="form-check-input" %}
+                        <label class="form-check-label" for="id_df">
+                        Dairy-Free
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        {% render_field RestrictionsForm.gf type="checkbox" class="form-check-input" %}
+                        <label class="form-check-label" for="id_gf">
+                        Gluten-Free
+                        </label>
+                    </div>
+
+                    <li><hr class="dropdown-divider"></li>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </span>
+            {% endif %}
+
+            {% if HappeningNow %}
+            <button id="active-filter-btn" class="btn btn-primary" type="checkbox"
+                onclick="toggleShowNow();return false;"> Show All </button>
+            {% else %}
+            <button id="active-filter-btn" class="btn btn-primary" type="checkbox"
+                onclick="toggleShowNow();return false;">Hide Finished </button>
+            {% endif %}
+            
+        </div>
+
+    </div>
+
+
+    <!-- Content (holds the event information cards and the map)-->
+    <row class="row">
+        <div class="col-3 map-column">
+            <br>
+            <!-- Placeholder for where AJAX html goes, plz leave untouched -->
+            <div id="event-cards">
+            </div>
+
+        </div>
+        
+        <!-- Second column of the screen -->
+        <div class="col-9">
+            <div id="map"></div>
+        </div>
+    </row>
+
+</div>
+
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4--DpVDid7yY_Uqt6Pm1NL_NSN2eSty4&callback=initPage&v=beta&libraries=marker"
+    defer>
+</script>
+
+
+
+
+{% endblock %}

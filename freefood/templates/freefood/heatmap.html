@@ -1,0 +1,25 @@
+{% extends "freefood/base.html" %}
+
+{% block scripts %}<script src="/static/freefood/heatmap.js"></script>{% endblock %}
+
+{% block title %}HeatMap{% endblock %}
+
+{% block header %}
+	{% include "freefood/subtemplates/header.html" with page="heatmap" %}
+{% endblock %}
+
+{% block body %} 
+
+<page-title style="margin:10px;">Heat Map</page-title>
+<p style="margin-left:10px;">This heatmap shows where all past food events were held. This displays the historically most popular areas that would give away free food.</p>
+
+
+<div id="heatmap"></div>
+
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4--DpVDid7yY_Uqt6Pm1NL_NSN2eSty4&callback=initMap&v=weekly&libraries=visualization"
+    defer>
+</script>
+
+{% endblock %}

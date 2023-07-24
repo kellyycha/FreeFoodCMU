@@ -1,0 +1,201 @@
+.header {
+    padding: 1%;
+    padding-bottom: 1.5%;
+    padding-top: 1.5%;
+    position: relative;
+    font-family:'Poppins', sans-serif;
+    box-shadow: 0px 2px 10px rgb(119, 112, 210);
+}
+
+.header-title {
+    font-size: 200%;
+    font-weight: bold;
+    color: black !important;
+    text-decoration:none
+}
+
+a {
+    color: rgb(72, 64, 194) !important;
+}
+
+page-title {
+    padding-top: 1.5%;
+    font-size: 200%;
+    font-weight: bold;
+    color: rgb(72, 64, 194);
+}
+
+body {
+    background-image: url('/static/freefood/ui/background.png');
+    color: black;
+    font-weight: bold;
+    text-shadow: 0px 0px 7px white;
+}
+
+.datetime {
+    font-style: italic;
+}
+
+#new-event-map {
+    height: 50vh;
+}
+
+#map {
+    height: 80vh;
+}
+
+#heatmap {
+    height: 100%;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family:'Poppins', sans-serif;
+}
+
+.row {
+    display: flex;
+}
+  
+.column {
+    flex: 50%;
+    width: 40vw;
+}
+
+.new-event-form {
+    padding: 5px;
+    margin-left: 25vw;
+    margin-right: 25vw;
+    margin-top: 5vw;
+    margin-bottom: 5vw;
+}
+
+/* label {
+    font-size: large;
+    font-weight: bold;
+} */
+
+.disabled-input {
+    pointer-events: none;
+    background-color: white;
+    opacity: 1;
+}
+
+.navbar {
+    font-size: 150%;
+    float:right!important
+}
+
+.nav-link {
+    color: rgb(72, 64, 194);
+    margin: 0 10px; 
+    padding: 0 5px;
+}
+
+.nav-link:hover {
+    color: black !important;
+}
+
+.navbar-nav .nav-link.active, .navbar-nav .show>.nav-link {
+    color: black;
+}
+
+.input-group >.form-control:focus {
+    border-color: transparent;
+}
+
+.form-control {
+    border-color: rgb(119, 112, 210);
+}
+
+.btn-primary {
+    background-color: rgb(119, 112, 210); 
+    border-color: rgb(72, 64, 194);
+}
+
+.btn-primary:hover {
+    background-color: rgb(72, 64, 194) !important;
+    border-color: rgb(72, 64, 194) !important;
+}
+
+.btn-outline-secondary {
+    color: rgb(72, 64, 194); 
+    background-color: white;
+    border-color: rgb(72, 64, 194); 
+}
+
+.btn-outline-secondary:disabled {
+    color: rgb(72, 64, 194); 
+    background-color: white;
+    border-color: rgb(72, 64, 194); 
+}
+
+.btn-outline-secondary:hover, 
+.btn-outline-secondary:active, 
+.btn-outline-secondary:focus {
+    color: white !important;
+    text-shadow: 0px 0px 7px rgb(119, 112, 210) !important;
+    background-color: rgb(119, 112, 210) !important;
+    border-color: rgb(119, 112, 210) !important;
+}
+
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+    background-color: rgb(119, 112, 210) !important;
+    text-shadow: 0px 0px 7px rgb(119, 112, 210) !important;
+}
+
+
+.map-column {
+    height: 80vh;
+    overflow: hidden;
+    overflow-y: scroll; 
+}
+
+/* use this to limit height of images in the left column. */
+.img-col-fit {
+    height: 200px; /* height of container */
+    object-fit: cover;
+}
+
+.required-indicator {
+    color: rgb(72, 64, 194); 
+}
+
+.modal-warning {
+    background: rgb(72, 64, 194); 
+    color: white;
+}
+
+/* Adjust the style of google map to make the marker text bigger/thicker.  */
+.gm-style {
+    font: 400 13px Poppins, Poppins, sans-serif;
+    font-weight: bold;
+}
+
+.card {
+    background-color:white;
+    border-radius: 25px;
+}
+
+.checked {
+    color: orange;
+  }
+
+.clickable-star {
+    cursor: pointer;
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+.show-submit-rating {
+    display: inline-block; 
+    text-align: right; 
+    width: 100%; 
+    color:green;
+}

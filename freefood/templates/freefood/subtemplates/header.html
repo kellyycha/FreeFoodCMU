@@ -1,0 +1,31 @@
+
+<nav class="navbar navbar-dark navbar-expand-lg">
+    <div class="container-fluid">
+        <div class="navbar-nav">
+            {% if page == "map" %}
+                <a class="nav-link active" style="text-decoration:underline;" aria-current="page" href="{% url 'map' %}">Map</a>
+            {% else %}
+                <a class="nav-link" href="{% url 'map' %}">Map</a>
+            {% endif %}
+
+            {% if page == "heatmap" %}
+                <a class="nav-link active" style="text-decoration:underline;" aria-current="page" href="{% url 'heatmap' %}">History</a>
+            {% else %}
+                <a class="nav-link" href="{% url 'heatmap' %}">History</a>
+            {% endif %}
+
+            {% if page == 'new_event' %}
+                <a class="nav-link active" style="text-decoration:underline;" aria-current="page" href="{% url 'new_event' %}">New Event</a>
+            {% else %}
+                <a class="nav-link" href="{% url 'new_event' %}">New Event</a>
+            {% endif %}
+            
+            {% if page == 'profile' %}
+                <a class="nav-link active" style="text-decoration:underline;" aria-current="page" href="{% url 'profile' %}">Profile</a>
+            {% else %}
+                <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+            {% endif %}
+
+        </div>
+    </div>
+</nav>

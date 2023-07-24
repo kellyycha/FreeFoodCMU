@@ -1,0 +1,27 @@
+{% extends "freefood/base.html" %}
+
+{% load widget_tweaks %}
+
+{% block title %}New Event{% endblock %}
+
+{% block scripts %}<script src="/static/freefood/new_event_map.js"></script>{% endblock %}
+
+{% block header %}
+    {% include "freefood/subtemplates/header.html" with page="new_event" %}
+{% endblock %}
+
+{% block body %}     
+    <form action="{% url 'new_event' %}" method="POST" enctype="multipart/form-data" class="row g-3 container-sm mx-auto needs-validation" novalidate>
+        <page-title>Create New Event</page-title>
+        {% include "freefood/subtemplates/event_form.html" with form_function="Create Event" %}
+    </form>
+    
+    <h1>&nbsp</h1>    
+
+    <script>
+        // by default load the current day in here
+        document.getElementById('id_date').valueAsDate = new Date();
+            
+    </script>
+{% endblock %}
+

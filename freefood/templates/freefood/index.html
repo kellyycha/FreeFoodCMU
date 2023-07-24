@@ -1,0 +1,180 @@
+{% extends "freefood/base.html" %}
+
+{% load string_float_to_int %}
+
+{% block title %}Index{% endblock %}
+
+{% block scripts %}
+<script src="https://kit.fontawesome.com/980e4cc40c.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block header %}
+	{% include "freefood/subtemplates/header.html" %}
+{% endblock %}
+
+{% block body %} 
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-6 align-self-center">
+                    <div class="left-content" style="margin-left:20%;">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <page-title>Who Doesn't Love Free Food?</page-title>
+                                <p>
+                                    Calling all hungry students! Want to find events on campus that are giving away free food? 
+                                    Our misson is to reduce food waste and provide an opportunity for students to share and locate the free meals on campus.
+                                </p>
+                            </div>
+                            <div class="col-lg-12">
+                                <button class="btn btn-primary btn-lg" style="width:300px">
+                                    <a href="{% url 'map' %}" style="color:white !important; text-decoration:none;">Locate Free Food Now!</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 ">
+                    <img src="/static/freefood/ui/logo.png" style="width:40%; margin-top:10%;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row">
+            <div class="col-4">
+                <h4>Today's Popular Events:</h4>
+            </div>
+            <div class="col">
+                <hr style="height:4px; background-color:rgb(41, 26, 134);">
+            </div>
+        </div>
+        
+        {% for event in popular %}
+            <div class="col-sm">
+                {% if event != None %}
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title"> <a href="/freefood/event/{{event.id}}/">{{ event.name_of_event }}</a></h5>
+                                    <div class="mb-2">
+                                        {% for star in event.rating|rating_to_stars %}
+                                            <i class="fa fa-star checked"></i>
+                                        {% endfor %}
+                                        {% for star in event.rating|rating_to_blanks %}
+                                            <i class="fa fa-star"></i>
+                                        {% endfor %}
+                                    </div>
+                                    <h6 class="card-subtitle mb-2 text-muted"> {{ event.building_name }} {{ event.room_number }}</h6>
+                                    <p class="card-text"> {{ event.start_time }}</p>
+                                    <p class="card-text"> {{ event.food }} </p>
+                                </div>
+                                <div class="col">
+                                    {% if event.images.all.last != None %}
+                                        <img src="/freefood/image-by-event/{{event.id}}" class="d-block img-col-fit" style="height:100%; width:100%;" >
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div> 
+        {% endfor %}
+
+    </div>
+    <div class="row">
+        <div class="row" style="margin-top:20px;">
+            <div class="col-4">
+                <h4>Today's Top Rated Events:</h4>
+            </div>
+            <div class="col">
+                <hr style="height:4px; background-color:rgb(41, 26, 134);">
+            </div>
+        </div>
+
+        {% for event in top %}
+            <div class="col-sm">
+                {% if event != None %}
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title"> <a href="/freefood/event/{{event.id}}/">{{ event.name_of_event }}</a></h5>
+                                    <div class="mb-2">
+                                        {% for star in event.rating|rating_to_stars %}
+                                            <i class="fa fa-star checked"></i>
+                                        {% endfor %}
+                                        {% for star in event.rating|rating_to_blanks %}
+                                            <i class="fa fa-star"></i>
+                                        {% endfor %}
+                                    </div>
+                                    <h6 class="card-subtitle mb-2 text-muted"> {{ event.building_name }} {{ event.room_number }}</h6>
+                                    <p class="card-text"> {{ event.start_time }}</p>
+                                    <p class="card-text"> {{ event.food }} </p>
+                                </div>
+                                <div class="col">
+                                    {% if event.images.all.last != None %}
+                                        <img src="/freefood/image-by-event/{{event.id}}" class="d-block img-col-fit" style="height:100%; width:100%;" >
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div> 
+        {% endfor %}
+
+    </div>
+    <div class="row">
+        <div class="row" style="margin-top:20px;">
+            <div class="col-4">
+                <h4>Today's Recently Posted Events:</h4>
+            </div>
+            <div class="col">
+                <hr style="height:4px; background-color:rgb(41, 26, 134);">
+            </div>
+        </div>
+
+        {% for event in recent %}
+            <div class="col-sm">
+                <div class="col-sm">
+                    {% if event != None %}
+                        <div class="card">
+                            <div class="card-body">
+								<div class="row">
+									<div class="col">
+										<h5 class="card-title"> <a href="/freefood/event/{{event.id}}/">{{ event.name_of_event }}</a></h5>
+                                        <div class="mb-2">
+                                            {% for star in event.rating|rating_to_stars %}
+                                                <i class="fa fa-star checked"></i>
+                                            {% endfor %}
+                                            {% for star in event.rating|rating_to_blanks %}
+                                                <i class="fa fa-star"></i>
+                                            {% endfor %}
+                                        </div>
+										<h6 class="card-subtitle mb-2 text-muted"> {{ event.building_name }} {{ event.room_number }}</h6>
+										<p class="card-text"> {{ event.start_time }}</p>
+										<p class="card-text"> {{ event.food }} </p>
+									</div>
+									<div class="col">
+										{% if event.images.all.last != None %}
+											<img src="/freefood/image-by-event/{{event.id}}" class="d-block img-col-fit" style="height:100%; width:100%;" >
+										{% endif %}
+									</div>
+								</div>
+							</div>
+                        </div>
+                    {% endif %}
+                </div> 
+            </div> 
+        {% endfor %}
+
+    </div>
+    <h1>&nbsp</h1>
+</div>
+
+
+{% endblock %}
